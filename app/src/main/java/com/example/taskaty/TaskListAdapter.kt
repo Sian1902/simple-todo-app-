@@ -13,7 +13,7 @@ class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdap
         fun onItemDeleted(position: Int)
     }
    val taskList= mutableListOf<TaskData>()
-    fun setList(list:List<TaskData>){
+    fun setList(list:MutableList<TaskData>){
         val diffUtil= TaskDiffUtil(taskList,list)
         val difResult= DiffUtil.calculateDiff(diffUtil)
         taskList.clear()

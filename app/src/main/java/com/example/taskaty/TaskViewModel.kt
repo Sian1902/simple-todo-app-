@@ -34,12 +34,12 @@ class TaskViewModel:ViewModel(){
         editor.putString("taskList", jsonString)
         editor.apply()
     }
-    fun getTaskList(context: Context): List<TaskData> {
+    fun getTaskList(context: Context) {
         val gson = Gson()
-        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences("TaskPrefs", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("taskList", null)
-        val type = object : TypeToken<List<TaskData>>() {}.type
-        return gson.fromJson(savedString, type) ?: emptyList()
+        val type = object : TypeToken<MutableList<TaskData>>() {}.type
+        _taskList.value=gson.fromJson(savedString, type) ?: mutableListOf<TaskData>()
     }
 
 

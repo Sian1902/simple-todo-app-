@@ -31,6 +31,7 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         taskAdapter= TaskListAdapter(this)
         binding.taskRecycler.adapter=taskAdapter
         binding.taskRecycler.layoutManager=LinearLayoutManager(requireContext())
@@ -42,6 +43,7 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
         taskViewModel.taskList.observe(viewLifecycleOwner){
             taskAdapter.setList(it)
         }
+        taskViewModel.getTaskList(requireContext())
     }
 
     override fun onItemClick(task: TaskData) {
@@ -52,6 +54,11 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
     override fun onItemDeleted(position: Int) {
       taskViewModel.deleteAt(position)
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        taskViewModel.saveTaskList(requireContext())
     }
 
 
