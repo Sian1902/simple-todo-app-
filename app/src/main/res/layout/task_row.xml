@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="30dp"
+    android:elevation="5dp"
+    android:layout_marginTop="10dp"
+    app:strokeColor="@color/blue"
+    app:strokeWidth="1dp"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_task_24"
+            android:padding="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleX="2"
+            android:scaleY="2"/>
+        <TextView
+            android:id="@+id/taskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Task Title"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Category"
+            app:layout_constraintTop_toBottomOf="@id/taskTitle"
+            app:layout_constraintStart_toStartOf="@id/taskTitle"
+            app:layout_constraintEnd_toEndOf="@id/taskTitle"
+            android:textSize="18sp"
+            android:textColor="@color/blue"/>
+        <ImageButton
+            android:id="@+id/detailsButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_navigate_next_24"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
+            android:contentDescription="Navigate to next screen"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleY="2"
+            android:scaleX="2"/>
+
+
+        <CheckBox
+            android:id="@+id/doneCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/detailsButtons"
+            app:layout_constraintEnd_toEndOf="@id/detailsButtons"
+            android:text="Done"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:buttonTint="@color/blue"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</com.google.android.material.card.MaterialCardView>
