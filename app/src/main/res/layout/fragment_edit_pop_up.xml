@@ -78,52 +78,47 @@
                 android:id="@+id/categoryText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_bg"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/spinner_bg"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:padding="8dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:src="@drawable/baseline_priority_high_gray_24"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Priority Icon" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_priority_high_gray_24"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="Priority Icon" />
-
-            <Spinner
-                android:id="@+id/prioritySpinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="8dp"
-                android:background="@android:color/transparent"
-                android:spinnerMode="dropdown"
-                 />
-        </LinearLayout>
-
-
-
+        <Spinner
+            android:id="@+id/prioritySpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="8dp"
+            android:background="@android:color/transparent"
+            android:spinnerMode="dropdown"
+            />
+    </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addtaskBTN"
+            android:id="@+id/editTaskBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:text="Add Task"
+            android:text="Edit Task"
             android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
+            android:layout_gravity="center"/>
 
 
 

@@ -9,41 +9,95 @@
     android:elevation="5dp"
     app:strokeColor="@color/blue"
     app:strokeWidth="1dp">
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/windowTItle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Task Details"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/blue"
+        android:textAlignment="center"/>
+    <ImageView
+        android:id="@+id/taskImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_check_circle_24"
+        app:layout_constraintTop_toBottomOf="@id/windowTItle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="15dp"/>
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text= "Name"
-        android:textStyle="bold"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/taskImage"
+        app:layout_constraintStart_toEndOf="@id/taskImage"
+        app:layout_constraintBottom_toBottomOf="@id/taskImage"
         android:textColor="@color/blue"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text= "category"
-        android:textColor="@color/blue"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text= "details"
-        android:textStyle="bold"
-        android:textColor="@color/blue"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-       android:padding="15dp" />
-</LinearLayout>
+        tools:text="task name"
+        android:textSize="18sp"/>
+        <ImageView
+            android:id="@+id/infoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_info_24"
+            android:padding="15sp"
+            app:layout_constraintTop_toBottomOf="@id/taskImage"
+            app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="@id/infoImage"
+                app:layout_constraintStart_toEndOf="@id/infoImage"
+                app:layout_constraintBottom_toBottomOf="@id/infoImage"
+                android:textColor="@color/blue"
+                tools:text="task details"
+                android:textSize="18sp"/>
+            <ImageView
+                android:id="@+id/categoryImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_category_24"
+                android:padding="15dp"
+                app:layout_constraintTop_toBottomOf="@id/infoImage"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                tools:text="category"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toEndOf="@id/categoryImage"
+                app:layout_constraintTop_toTopOf="@id/categoryImage"
+                app:layout_constraintBottom_toBottomOf="@id/categoryImage"/>
+            <ImageView
+                android:id="@+id/priorityImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_priority_high_24"
+                android:padding="15dp"
+                app:layout_constraintTop_toBottomOf="@id/categoryImage"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                tools:text="priority"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toEndOf="@id/priorityImage"
+                app:layout_constraintTop_toTopOf="@id/priorityImage"
+                app:layout_constraintBottom_toBottomOf="@id/priorityImage"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

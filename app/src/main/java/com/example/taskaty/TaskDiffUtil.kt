@@ -1,14 +1,22 @@
-package com.example.taskaty
-
 import androidx.recyclerview.widget.DiffUtil
+import com.example.taskaty.TaskData
 
-class TaskDiffUtil(val newList:List<TaskData>,val oldList:List<TaskData> ):
-    DiffUtil.Callback() {
-    override fun getOldListSize()=oldList.size
-    override fun getNewListSize()=newList.size
+class TaskDiffUtil(
+    private val oldList: List<TaskData>,
+    private val newList: List<TaskData>
+) : DiffUtil.Callback() {
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int)=newList[newItemPosition]==oldList[oldItemPosition]
+    override fun getOldListSize() = oldList.size
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int)=oldList[oldItemPosition].description==newList[newItemPosition].description
+    override fun getNewListSize() = newList.size
 
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        // Assuming TaskData has a unique ID
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        // Compare the entire item to check if contents are the same
+        return oldList[oldItemPosition] == newList[newItemPosition]
+    }
 }

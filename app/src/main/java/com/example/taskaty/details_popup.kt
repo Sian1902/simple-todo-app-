@@ -26,6 +26,7 @@ class details_popup(val item: TaskData) : DialogFragment() {
         binding.name.text = item.name
         binding.category.text = item.category
         binding.details.text = item.description
+        binding.priority.text=item.priority.displayName
 
         dialog.window?.setBackgroundDrawableResource(R.drawable.rounden_bg) // Customize dialog background
         return dialog

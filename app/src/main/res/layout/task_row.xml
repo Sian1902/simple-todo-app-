@@ -9,15 +9,19 @@
     android:layout_marginTop="10dp"
     app:strokeColor="@color/blue"
     app:strokeWidth="1dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/taskImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_task_24"
+            android:src="@drawable/baseline_check_circle_24"
             android:padding="15dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,8 +33,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/taskImage"
             tools:text="Task Title"
             android:textColor="@color/blue"
             android:textStyle="bold"
@@ -67,11 +70,19 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/detailsButtons"
             app:layout_constraintEnd_toEndOf="@id/detailsButtons"
-            android:text="Done"
-            android:textStyle="bold"
-            android:textSize="18sp"
+
             android:textColor="@color/blue"
             android:buttonTint="@color/blue"
+             />
+        <ImageButton
+            android:id="@+id/editBTN"
+            android:layout_width="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_edit_24"
+            app:layout_constraintTop_toTopOf="@id/doneCheckBox"
+            app:layout_constraintEnd_toStartOf="@id/doneCheckBox"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
     

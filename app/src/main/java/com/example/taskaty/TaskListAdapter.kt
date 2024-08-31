@@ -1,5 +1,7 @@
 package com.example.taskaty
 
+import TaskDiffUtil
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +12,8 @@ import com.example.taskaty.databinding.TaskRowBinding
 class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     interface IAdapterHelper{
         fun onItemClick(task:TaskData)
-        fun onItemDeleted(position: Int)
+        fun onItemDeleted(task: TaskData)
+        fun onEdit(task:TaskData,position: Int)
     }
    val taskList= mutableListOf<TaskData>()
     fun setList(list:MutableList<TaskData>){
@@ -28,13 +31,16 @@ class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdap
                 binding.doneCheckBox.isChecked=false
                 binding.doneCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
                     if(isChecked){
-                      item.onItemDeleted(adapterPosition)
+                      item.onItemDeleted(task)
                         taskList.removeAt(adapterPosition)
                        notifyItemRemoved(adapterPosition)
                     }
                 }
-                binding.root.setOnClickListener {
+                binding.detailsButtons.setOnClickListener{
                     item.onItemClick(task)
+                }
+                binding.editBTN.setOnClickListener {
+                  val task=item.onEdit(task,adapterPosition)
                 }
             }
     }
@@ -47,7 +53,7 @@ class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdap
     override fun getItemCount()=taskList.size
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val task=taskList[position]
+        val task = taskList[position]
         holder.bind(task)
     }
 }

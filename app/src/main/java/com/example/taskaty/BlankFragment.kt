@@ -17,7 +17,6 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
         FragmentBlankBinding.inflate(layoutInflater)
     }
     val taskViewModel:TaskViewModel by activityViewModels()
-    val taskList= mutableListOf<TaskData>()
     lateinit var taskAdapter:TaskListAdapter
 
     override fun onCreateView(
@@ -35,7 +34,6 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
         taskAdapter= TaskListAdapter(this)
         binding.taskRecycler.adapter=taskAdapter
         binding.taskRecycler.layoutManager=LinearLayoutManager(requireContext())
-        taskAdapter.setList(taskList)
         binding.fab.setOnClickListener {
             val popUp= PopUp()
             popUp.show((activity as AppCompatActivity).supportFragmentManager,"New Task")
@@ -44,6 +42,23 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
             taskAdapter.setList(it)
         }
         taskViewModel.getTaskList(requireContext())
+        binding.all.setOnClickListener {
+            taskAdapter.setList( taskViewModel.setPriority(TaskPriority.NONE))
+        }
+        binding.highPriority.setOnClickListener {
+
+          taskAdapter.setList(taskViewModel.setPriority(TaskPriority.HIGH))
+        }
+        binding.mediumPriority.setOnClickListener {
+            taskAdapter.setList(taskViewModel.setPriority(TaskPriority.MEDIUM))
+
+
+        }
+        binding.lowPriority.setOnClickListener {
+            taskAdapter.setList(taskViewModel.setPriority(TaskPriority.LOW))
+
+
+        }
     }
 
     override fun onItemClick(task: TaskData) {
@@ -51,10 +66,15 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
         detailsPopup.show((activity as AppCompatActivity).supportFragmentManager,"Task Details")
     }
 
-    override fun onItemDeleted(position: Int) {
-      taskViewModel.deleteAt(position)
-
+    override fun onItemDeleted(task: TaskData) {
+      taskViewModel.delete(task)
     }
+
+    override fun onEdit(task: TaskData, position: Int) {
+        val popUp= EditPopUp(task,position,taskAdapter)
+        popUp.show((activity as AppCompatActivity).supportFragmentManager,"New Task")
+    }
+
 
     override fun onPause() {
         super.onPause()

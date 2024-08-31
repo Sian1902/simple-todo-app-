@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -25,6 +26,10 @@ class PopUp (): DialogFragment() {
         builder.setView(binding.root)
         val dialog = builder.create()
         dialog.window?.setBackgroundDrawableResource(R.drawable.rounden_bg)
+        val enumVals=TaskPriority.values().map { it.displayName }
+        val adapter= ArrayAdapter(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,enumVals)
+        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
+        binding.prioritySpinner.adapter=adapter
         binding.addtaskBTN.setOnClickListener {
             if (binding.nameInput.text.toString().isEmpty()) {
                 Toast.makeText(requireContext(), "Can't add task, you can't leave name empty", Toast.LENGTH_LONG).show()
@@ -33,7 +38,8 @@ class PopUp (): DialogFragment() {
                 val name = binding.nameInput.text.toString()
                 var category= binding.categoryText.text.toString()
                 val description=binding.detailsInput.text.toString()
-                taskViewModel.addTask(TaskData(name, description, category))
+                val priority=binding.prioritySpinner.selectedItem.toString()
+                taskViewModel.addTask(TaskData(name, description, category, TaskPriority.valueOf(priority.uppercase())))
                 Toast.makeText(requireContext(), "Task added successfully", Toast.LENGTH_LONG).show()
                 dismiss()
             }

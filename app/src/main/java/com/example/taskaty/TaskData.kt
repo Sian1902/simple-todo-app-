@@ -1,3 +1,5 @@
 package com.example.taskaty
 
-data class TaskData(var name:String,var description:String="",var category:String="")
+import java.util.UUID
+
+data class TaskData(var name:String,var description:String="",var category:String="",var priority: TaskPriority=TaskPriority.NONE, val id: String = UUID.randomUUID().toString())
