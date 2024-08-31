@@ -39,7 +39,9 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
             popUp.show((activity as AppCompatActivity).supportFragmentManager,"New Task")
         }
         taskViewModel.taskList.observe(viewLifecycleOwner){
-            taskAdapter.setList(it)
+            val filteredList = taskViewModel.setPriority(taskViewModel.currPriority)
+
+            taskAdapter.setList(filteredList.toMutableList())
         }
         taskViewModel.getTaskList(requireContext())
         binding.all.setOnClickListener {
@@ -71,7 +73,7 @@ class BlankFragment : Fragment(),TaskListAdapter.IAdapterHelper{
     }
 
     override fun onEdit(task: TaskData, position: Int) {
-        val popUp= EditPopUp(task,position,taskAdapter)
+        val popUp= EditPopUp(task)
         popUp.show((activity as AppCompatActivity).supportFragmentManager,"New Task")
     }
 

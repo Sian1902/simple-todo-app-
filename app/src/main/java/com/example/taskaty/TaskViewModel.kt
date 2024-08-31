@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken
 class TaskViewModel:ViewModel(){
     private val _taskList:MutableLiveData<MutableList<TaskData>> = MutableLiveData(mutableListOf())
     val taskList:MutableLiveData<MutableList<TaskData>> get() = _taskList
-
+    var currPriority=TaskPriority.NONE
     fun addTask(task: TaskData) {
         val currList = _taskList.value?.toMutableList() ?: mutableListOf()
         currList.add(task)
@@ -18,6 +18,7 @@ class TaskViewModel:ViewModel(){
     }
 
     fun setPriority(priority: TaskPriority):MutableList<TaskData>{
+        currPriority=priority
         if(priority==TaskPriority.NONE){
 
             return _taskList?.value?: mutableListOf()
@@ -26,21 +27,33 @@ class TaskViewModel:ViewModel(){
 
     }
     fun delete(taskData: TaskData){
+
         _taskList.value?.remove(taskData)
     }
-    fun editTaskAt(pos: Int, taskData: TaskData) {
+    fun editTaskAt(oldTaskData: TaskData, taskData: TaskData) {
+        // Get the current list or create a new one if null
         val currList = _taskList.value?.toMutableList() ?: mutableListOf()
-        if (pos >= 0 && pos < currList.size) {
-            val updatedTask = currList[pos].copy(
+
+        // Find the index of the old task data
+        val index = currList.indexOf(oldTaskData)
+
+        if (index != -1) {
+            val updatedTask = oldTaskData.copy(
                 name = taskData.name,
                 description = taskData.description,
                 category = taskData.category,
-                priority = taskData.priority
+                priority = taskData.priority,
+                id = taskData.id
             )
-            currList[pos] = updatedTask
+
+            // Replace the old task with the updated task
+            currList[index] = updatedTask
+
+            // Update the live data with the modified list
             _taskList.value = currList
         }
     }
+
     fun saveTaskList(context: Context) {
         val gson = Gson()
         val jsonString = gson.toJson(_taskList.value)

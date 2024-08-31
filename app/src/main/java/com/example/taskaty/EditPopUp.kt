@@ -15,7 +15,7 @@ import com.example.taskaty.databinding.FragmentEditPopUpBinding
 import com.example.taskaty.databinding.FragmentPopUpBinding
 
 
-class EditPopUp (val taskData: TaskData,val pos:Int,val taskAdapter:TaskListAdapter): DialogFragment() {
+class EditPopUp (val taskData: TaskData): DialogFragment() {
 
     val taskViewModel:TaskViewModel by activityViewModels()
     private lateinit var binding: FragmentEditPopUpBinding
@@ -42,8 +42,7 @@ class EditPopUp (val taskData: TaskData,val pos:Int,val taskAdapter:TaskListAdap
             val description= binding.detailsInput.text.toString()
             val category=binding.categoryText.text.toString()
             val priority=binding.prioritySpinner.selectedItem.toString()
-            taskViewModel.editTaskAt(pos,TaskData(name,description,category, TaskPriority.valueOf(priority.uppercase())))
-            taskAdapter.notifyItemChanged(pos)
+           taskViewModel.editTaskAt(taskData,TaskData(name,description,category, TaskPriority.valueOf(priority.uppercase())))
             dismiss()
         }
         return dialog
