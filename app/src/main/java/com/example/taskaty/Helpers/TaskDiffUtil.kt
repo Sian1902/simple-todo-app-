@@ -1,5 +1,7 @@
+package com.example.taskaty.Helpers
+
 import androidx.recyclerview.widget.DiffUtil
-import com.example.taskaty.TaskData
+import com.example.taskaty.Room.TaskData
 
 class TaskDiffUtil(
     private val oldList: List<TaskData>,

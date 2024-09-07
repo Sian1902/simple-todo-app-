@@ -1,4 +1,4 @@
-package com.example.taskaty
+package com.example.taskaty.Room
 
 import androidx.lifecycle.LiveData
 
@@ -19,13 +19,13 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.deleteTask(task)
     }
 
-    // Get all tasks
-    fun getAllTasks():LiveData<List<TaskData>> {
+    // Get all tasks (returns LiveData)
+    fun getAllTasks(): LiveData<List<TaskData>> {
         return taskDao.getAllTasks()
     }
 
-    // Get tasks by priority
-     fun getTasksByPriority(priority: String):LiveData<List<TaskData>> {
+    // Get tasks by priority (returns LiveData)
+    fun getTasksByPriority(priority: String): LiveData<List<TaskData>> {
         return taskDao.selectPriority(priority)
     }
 }

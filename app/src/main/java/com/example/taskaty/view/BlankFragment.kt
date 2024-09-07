@@ -1,4 +1,4 @@
-package com.example.taskaty
+package com.example.taskaty.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,17 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.taskaty.R
+import com.example.taskaty.Room.TaskData
+import com.example.taskaty.Room.TaskDatabase
+import com.example.taskaty.Helpers.TaskListAdapter
+import com.example.taskaty.Helpers.TaskPriority
+import com.example.taskaty.Room.TaskRepository
+import com.example.taskaty.viewModel.TaskViewModel
+import com.example.taskaty.viewModel.TaskViewModelFactory
 import com.example.taskaty.databinding.FragmentBlankBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class BlankFragment : Fragment(), TaskListAdapter.IAdapterHelper {
 
     private lateinit var binding: FragmentBlankBinding
     private lateinit var taskAdapter: TaskListAdapter
-
+    private  var selectedPriority= TaskPriority.NONE
     // Initialize ViewModel using activityViewModels() to share with other fragments
     private val taskViewModel: TaskViewModel by activityViewModels {
         TaskViewModelFactory(TaskRepository(TaskDatabase.getData(requireContext()).taskDao()))
@@ -41,7 +46,7 @@ class BlankFragment : Fragment(), TaskListAdapter.IAdapterHelper {
         binding.taskRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         binding.fab.setOnClickListener {
-            val popUp = PopUp()
+            val popUp = PopUp(selectedPriority)
             popUp.show((activity as AppCompatActivity).supportFragmentManager, "New Task")
         }
 
@@ -51,32 +56,27 @@ class BlankFragment : Fragment(), TaskListAdapter.IAdapterHelper {
         }
 
         binding.all.setOnClickListener {
+            selectedPriority= TaskPriority.NONE
             updatePrioritySelection(binding.all)
-            taskViewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
-
-                taskAdapter.setList(tasks.toMutableList())
-            }
+            taskViewModel.getTasksByPriority(TaskPriority.NONE.toString())
         }
 
         binding.highPriority.setOnClickListener {
+            selectedPriority= TaskPriority.HIGH
             updatePrioritySelection(binding.highPriority)
-            taskViewModel.getTasksByPriority(TaskPriority.HIGH.toString()).observe(viewLifecycleOwner) { tasks ->
-                taskAdapter.setList(tasks.toMutableList())
-            }
+            taskViewModel.getTasksByPriority(TaskPriority.HIGH.toString())
         }
 
         binding.mediumPriority.setOnClickListener {
+            selectedPriority= TaskPriority.MEDIUM
             updatePrioritySelection(binding.mediumPriority)
-            taskViewModel.getTasksByPriority(TaskPriority.MEDIUM.toString()).observe(viewLifecycleOwner) { tasks ->
-                taskAdapter.setList(tasks.toMutableList())
-            }
+            taskViewModel.getTasksByPriority(TaskPriority.MEDIUM.toString())
         }
 
         binding.lowPriority.setOnClickListener {
+            selectedPriority= TaskPriority.LOW
             updatePrioritySelection(binding.lowPriority)
-            taskViewModel.getTasksByPriority(TaskPriority.LOW.toString()).observe(viewLifecycleOwner) { tasks ->
-                taskAdapter.setList(tasks.toMutableList())
-            }
+            taskViewModel.getTasksByPriority(TaskPriority.LOW.toString())
         }
     }
 
@@ -110,12 +110,15 @@ class BlankFragment : Fragment(), TaskListAdapter.IAdapterHelper {
     }
 
     override fun onItemDeleted(task: TaskData) {
-        taskViewModel.deleteTask(task)
+        taskViewModel.deleteTask(task,selectedPriority.toString())
+
     }
 
 
     override fun onEdit(task: TaskData, position: Int) {
-        val popUp = EditPopUp(task)
+        val popUp = EditPopUp(task,selectedPriority)
         popUp.show((activity as AppCompatActivity).supportFragmentManager, "Edit Task")
     }
+
+
 }

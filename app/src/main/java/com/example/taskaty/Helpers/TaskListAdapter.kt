@@ -1,19 +1,18 @@
-package com.example.taskaty
+package com.example.taskaty.Helpers
 
-import TaskDiffUtil
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.taskaty.Room.TaskData
 import com.example.taskaty.databinding.TaskRowBinding
 
-class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
+class TaskListAdapter(val item: IAdapterHelper):RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     interface IAdapterHelper{
-        fun onItemClick(task:TaskData)
+        fun onItemClick(task: TaskData)
         fun onItemDeleted(task: TaskData)
-        fun onEdit(task:TaskData,position: Int)
+        fun onEdit(task: TaskData, position: Int)
     }
    val taskList= mutableListOf<TaskData>()
     fun setList(list:MutableList<TaskData>){
@@ -25,7 +24,7 @@ class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdap
     }
 
     inner class TaskViewHolder(val binding: TaskRowBinding):ViewHolder(binding.root){
-            fun bind(task:TaskData){
+            fun bind(task: TaskData){
                 binding.taskTitle.text=task.name
                 binding.category.text=task.category
                 binding.doneCheckBox.isChecked=false

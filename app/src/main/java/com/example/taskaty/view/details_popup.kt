@@ -1,12 +1,12 @@
-package com.example.taskaty
+package com.example.taskaty.view
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.taskaty.R
+import com.example.taskaty.Room.TaskData
 import com.example.taskaty.databinding.FragmentDetailsPopupBinding
 
 class details_popup(val item: TaskData) : DialogFragment() {

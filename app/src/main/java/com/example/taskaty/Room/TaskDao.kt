@@ -1,14 +1,15 @@
-package com.example.taskaty
+package com.example.taskaty.Room
+
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.taskaty.TaskData
 
 @Dao
 interface TaskDao {
+
     @Insert
     suspend fun insertTask(task: TaskData)
 
@@ -16,10 +17,10 @@ interface TaskDao {
     suspend fun updateTask(task: TaskData)
 
     @Delete
-    suspend fun deleteTask(task: TaskData) // Assuming you want to delete the entire task object
+    suspend fun deleteTask(task: TaskData)
 
     @Query("SELECT * FROM TaskData WHERE priority = :priority")
-     fun selectPriority(priority: String):LiveData< List<TaskData>>
+    fun selectPriority(priority: String): LiveData<List<TaskData>>
 
     @Query("SELECT * FROM TaskData")
     fun getAllTasks(): LiveData<List<TaskData>>

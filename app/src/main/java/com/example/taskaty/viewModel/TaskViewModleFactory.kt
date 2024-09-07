@@ -1,7 +1,8 @@
-package com.example.taskaty
+package com.example.taskaty.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.taskaty.Room.TaskRepository
 
 class TaskViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
