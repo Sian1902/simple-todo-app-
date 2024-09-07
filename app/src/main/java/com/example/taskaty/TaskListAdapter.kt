@@ -24,7 +24,7 @@ class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdap
         difResult.dispatchUpdatesTo(this)
     }
 
-    inner class TaskViewHolder(val binding: TaskRowBinding):RecyclerView.ViewHolder(binding.root){
+    inner class TaskViewHolder(val binding: TaskRowBinding):ViewHolder(binding.root){
             fun bind(task:TaskData){
                 binding.taskTitle.text=task.name
                 binding.category.text=task.category
@@ -32,8 +32,8 @@ class TaskListAdapter(val item:IAdapterHelper):RecyclerView.Adapter<TaskListAdap
                 binding.doneCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
                     if(isChecked){
                       item.onItemDeleted(task)
-                        taskList.removeAt(adapterPosition)
-                       notifyItemRemoved(adapterPosition)
+
+
                     }
                 }
                 binding.detailsButtons.setOnClickListener{
